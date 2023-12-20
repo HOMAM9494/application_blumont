@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "472860537070",
+    "project_id": "blumontapp-a0bda",
+    "storage_bucket": "blumontapp-a0bda.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:472860537070:android:fb986911035cbc5710c3ff",
+        "android_client_info": {
+          "package_name": "com.example.application_blumont"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBAAGYGBAEAaaTNWAewu-RbbXc-iBMfUk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

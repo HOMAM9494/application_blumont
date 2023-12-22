@@ -1,4 +1,6 @@
 import 'package:application_blumont/Screen/profial.dart';
+import 'package:application_blumont/Screen/welcome_screen.dart';
+import 'package:application_blumont/sharing/home_screen_admin.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -98,20 +100,36 @@ class _SignInScreenState extends State<SignInScreen> {
                                 signInRequired = true;
                               });
                               try {
-                                await FirebaseAuth.instance
+                                final credential = await FirebaseAuth.instance
                                     .signInWithEmailAndPassword(
                                         email: emailController.text,
-                                        password: passwordController.text)
-                                    .then((value) {
-                                  setState(() {
-                                    signInRequired = false;
-                                  });
+                                        password: passwordController.text);
+                                if(credential.user!.emailVerified){
+                                  Navigator.of(context).pushReplacement(
+                                        MaterialPageRoute(builder: (context) {
+                                          return HomeAdmin();
+                                        }),
+                                       );
+                                }
+                                else{
                                   Navigator.of(context).pushReplacement(
                                     MaterialPageRoute(builder: (context) {
-                                      return ProfilePage();
+                                      return WelcomeScreen();
                                     }),
                                   );
-                                });
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content:const Text(
+                                        " Please verification your email",
+                                        style: TextStyle(fontSize: 16),
+                                      ),
+                                      backgroundColor: Theme.of(context)
+                                          .colorScheme
+                                          .primary
+                                          .withOpacity(0.9),
+                                    ),
+                                  );
+                                }
                               } on FirebaseAuthException catch (e) {
                                 if (e.code == 'user-not-found') {
                                   ScaffoldMessenger.of(context).showSnackBar(

@@ -1,22 +1,24 @@
-
 import 'dart:io';
 import 'package:application_blumont/Screen/sign_up_screen.dart';
+import 'package:application_blumont/sharing/home_screen_admin.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'Screen/profial.dart';
 import 'Screen/welcome_screen.dart';
- main() async {
+
+main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Platform.isAndroid?
-  await Firebase.initializeApp(
-    options:FirebaseOptions(
-      apiKey: "AIzaSyBBAAGYGBAEAaaTNWAewu-RbbXc-iBMfUk",
-      appId: "1:472860537070:android:fb986911035cbc5710c3ff",
-      messagingSenderId: "472860537070",
-      projectId: "blumontapp-a0bda",
-    ),
-  ):await Firebase.initializeApp();
+  Platform.isAndroid
+      ? await Firebase.initializeApp(
+          options: FirebaseOptions(
+            apiKey: "AIzaSyBBAAGYGBAEAaaTNWAewu-RbbXc-iBMfUk",
+            appId: "1:472860537070:android:fb986911035cbc5710c3ff",
+            messagingSenderId: "472860537070",
+            projectId: "blumontapp-a0bda",
+          ),
+        )
+      : await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -28,24 +30,16 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  bool isAuth (){
-    bool auth=false;
-    FirebaseAuth.instance
-        .authStateChanges()
-        .listen((User? user) {
-      if (user == null) {
-       auth =false;
-      } else {
-        auth =true;
-      }
-    });
-    return auth;
-  }
   @override
   void initState() {
-
+    FirebaseAuth.instance.authStateChanges().listen((User? user) {
+      if (user == null) {
+        print('User is currently signed out!');
+      } else {
+        print('User is signed in!');
+      }
+    });
     super.initState();
-     isAuth();
   }
 
   // This widget is the root of your application.
@@ -63,10 +57,16 @@ class _MyAppState extends State<MyApp> {
             onSecondary: Colors.white,
             tertiary: Color.fromRGBO(255, 204, 128, 1),
             error: Colors.red,
-            outline: Color(0xFF424242)
-        ),
+            outline: Color(0xFF424242)),
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.teal.shade800,
+        )
       ),
-      home: isAuth()?ProfilePage():WelcomeScreen(),
+
+      home: (FirebaseAuth.instance.currentUser != null &&
+              FirebaseAuth.instance.currentUser!.emailVerified)
+          ? HomeAdmin()
+          : WelcomeScreen(),
     );
   }
 }

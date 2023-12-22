@@ -1,10 +1,16 @@
 import 'package:application_blumont/Screen/welcome_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
    ProfilePage({super.key});
 
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
 
+class _ProfilePageState extends State<ProfilePage> {
+
+  static final FirebaseAuth auth=FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +27,7 @@ class ProfilePage extends StatelessWidget {
                   );
                 });
               },
-              icon: const Icon(Icons.login)
+              icon: const Icon(Icons.login),
           )
         ],
       ),
@@ -36,15 +42,15 @@ class ProfilePage extends StatelessWidget {
             ),
             const SizedBox(height: 20.0),
              Text(
-              'uuuuuuuuuuu',
+             "${auth.currentUser!.email}",
               style: TextStyle(
                 fontSize: 20.0,
                 fontWeight: FontWeight.bold,
               ),
             ),
             const SizedBox(height: 10.0),
-            const Text(
-              'user@example.com',
+             Text(
+              "${auth.currentUser!.email}",
               style: TextStyle(
                 fontSize: 16.0,
                 color: Colors.grey,
@@ -52,9 +58,9 @@ class ProfilePage extends StatelessWidget {
             ),
             const SizedBox(height: 20.0),
             // يمكنك إضافة المزيد من المعلومات الشخصية هنا
-            buildInfoItem('الهاتف', '+123456789'),
-            buildInfoItem('العنوان', 'العنوان هنا'),
-            buildInfoItem('الجنس', 'ذكر'),
+            buildInfoItem('الهاتف', "${auth.currentUser!.uid}"),
+            buildInfoItem('العنوان', "${auth.currentUser!.phoneNumber}"),
+            buildInfoItem('الجنس', "${auth.currentUser!.photoURL}"),
           ],
         ),
       ),

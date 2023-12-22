@@ -31,7 +31,6 @@ class _DropdownButtonExampleState extends State<DropdownButtonExample> {
           dropdownColor: Colors.white,
           menuMaxHeight: 200,
           value: dropdownValue,
-          icon: const Icon(Icons.arrow_downward,color: Colors.black,size: 26,),
           elevation: 16,
           style: const TextStyle(color: Colors.black),
           underline: const SizedBox(

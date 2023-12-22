@@ -29,6 +29,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primary.withOpacity(0.6),
       body: SingleChildScrollView(
+        primary: true,
         child: SizedBox(
           height: MediaQuery.of(context).size.height,
           child: Stack(

@@ -1,25 +1,27 @@
 import 'dart:io';
-import 'package:application_blumont/Screen/sign_up_screen.dart';
-import 'package:application_blumont/sharing/home_screen_admin.dart';
+import 'package:application_blumont/Screen/Manger_HomeScreen/home_screen_admin.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'Screen/profial.dart';
-import 'Screen/welcome_screen.dart';
+import 'Screen/signin_up/welcome_screen.dart';
+import 'firebase_options.dart';
 
 main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Platform.isAndroid
-      ? await Firebase.initializeApp(
-          options: FirebaseOptions(
-            apiKey: "AIzaSyBBAAGYGBAEAaaTNWAewu-RbbXc-iBMfUk",
-            appId: "1:472860537070:android:fb986911035cbc5710c3ff",
-            messagingSenderId: "472860537070",
-            projectId: "blumontapp-a0bda",
-          ),
-        )
-      : await Firebase.initializeApp();
-  runApp(MyApp());
+  // Platform.isAndroid
+  //     ? await Firebase.initializeApp(
+  //         options: const FirebaseOptions(
+  //           apiKey: "AIzaSyAqaxIaPZeltG7mtCV5YUcZvwcluOB2aEw",
+  //           appId: "1:365398918902:android:80acb25a4fc5e6a2598ed7",
+  //           messagingSenderId: "365398918902",
+  //           projectId: "blumont-2024",
+  //         ),
+  //       )
+  //     : await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
@@ -60,13 +62,15 @@ class _MyAppState extends State<MyApp> {
             outline: Color(0xFF424242)),
         appBarTheme: AppBarTheme(
           backgroundColor: Colors.teal.shade800,
-        )
+          foregroundColor: Colors.white,
+          centerTitle: true,
+        ),
       ),
 
       home: (FirebaseAuth.instance.currentUser != null &&
               FirebaseAuth.instance.currentUser!.emailVerified)
-          ? HomeAdmin()
-          : WelcomeScreen(),
+          ?  HomeAdmin(FirebaseAuth.instance.currentUser!)
+          : const WelcomeScreen(),
     );
   }
 }

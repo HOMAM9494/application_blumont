@@ -1,9 +1,9 @@
 import 'dart:ui';
-import 'package:application_blumont/Screen/sign_in_screen.dart';
-import 'package:application_blumont/Screen/sign_up_screen.dart';
+import 'package:application_blumont/Screen/signin_up/sign_in_screen.dart';
+import 'package:application_blumont/Screen/signin_up/sign_up_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import '../firebace_user/user.dart';
+import '../../firebace_user/user.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
@@ -72,7 +72,8 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                     ),
                     child: Lottie.asset(
                       'assets/login/a4.json',
-                    )),
+                    ),
+              ),
               ),
               Align(
                 alignment: Alignment.bottomCenter,

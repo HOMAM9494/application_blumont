@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:365398918902:android:80acb25a4fc5e6a2598ed7",
+        "mobilesdk_app_id": "1:365398918902:android:fd6f6a09da6fefae598ed7",
         "android_client_info": {
-          "package_name": "com.example.application_blumont"
+          "package_name": "com.blumont.application_blumont"
         }
       },
       "oauth_client": [],

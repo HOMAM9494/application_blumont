@@ -61,3 +61,24 @@ class MyTextField extends StatelessWidget {
 	}
 
 }
+
+
+var themeText = const TextStyle(
+	fontSize: 18,
+	fontWeight: FontWeight.w600,
+	color: Colors.black,
+	fontStyle: FontStyle.italic,
+);
+
+var themeText1 = TextStyle(
+	fontSize: 18,
+	fontWeight: FontWeight.w600,
+	color: Colors.black.withOpacity(0.5),
+	fontStyle: FontStyle.normal,
+);
+var themeText2 = TextStyle(
+	fontSize: 16,
+	fontWeight: FontWeight.w600,
+	color: Colors.black.withOpacity(0.5),
+	fontStyle: FontStyle.normal,
+);
